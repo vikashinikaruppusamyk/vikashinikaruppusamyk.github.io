@@ -1,0 +1,866 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Vikashini — Backend Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@300;400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0c0c0e;
+    --surface: #131318;
+    --surface2: #1a1a22;
+    --border: #2a2a38;
+    --accent: #e8b86d;
+    --accent2: #7eb8a0;
+    --text: #e8e4dc;
+    --muted: #7a7888;
+    --dim: #3a3848;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* Background grid */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 48px 48px;
+    opacity: 0.25;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Ambient glow */
+  body::after {
+    content: '';
+    position: fixed;
+    top: -20%;
+    right: -10%;
+    width: 60vw;
+    height: 60vw;
+    background: radial-gradient(ellipse, rgba(232,184,109,0.06) 0%, transparent 65%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page { position: relative; z-index: 1; }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 48px;
+    background: rgba(12,12,14,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--text); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 120px 48px 80px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .hero-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.1s ease forwards;
+  }
+
+  .hero-label::before {
+    content: '//';
+    margin-right: 8px;
+    opacity: 0.5;
+  }
+
+  .hero-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(56px, 9vw, 112px);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.25s ease forwards;
+  }
+
+  .hero-name em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-desc {
+    max-width: 540px;
+    font-size: 17px;
+    color: var(--muted);
+    line-height: 1.75;
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.4s ease forwards;
+  }
+
+  .hero-desc strong { color: var(--text); font-weight: 500; }
+
+  .hero-cta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.55s ease forwards;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 28px;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #0c0c0e;
+    font-weight: 500;
+  }
+
+  .btn-primary:hover {
+    background: #f0c97a;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(232,184,109,0.25);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid var(--border);
+  }
+
+  .btn-ghost:hover {
+    border-color: var(--dim);
+    color: var(--text);
+  }
+
+  .hero-stack {
+    margin-top: 80px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.7s ease forwards;
+  }
+
+  .stack-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--dim);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .stack-tags { display: flex; gap: 10px; flex-wrap: wrap; }
+
+  .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    padding: 5px 12px;
+    border-radius: 3px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  /* SECTIONS */
+  section { padding: 100px 48px; max-width: 1100px; margin: 0 auto; }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 64px;
+  }
+
+  .section-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+  }
+
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(32px, 4vw, 52px);
+    color: var(--text);
+    line-height: 1;
+  }
+
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+    margin-left: 8px;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+
+  .about-text p {
+    color: var(--muted);
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 20px;
+  }
+
+  .about-text p strong { color: var(--text); font-weight: 500; }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+  }
+
+  .skill-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 18px 20px;
+    transition: all 0.2s;
+  }
+
+  .skill-item:hover {
+    background: var(--surface2);
+    border-color: var(--dim);
+  }
+
+  .skill-cat {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .skill-name {
+    font-size: 14px;
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  /* PROJECTS */
+  .projects-list { display: flex; flex-direction: column; gap: 2px; }
+
+  .project-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 40px 44px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 32px;
+    align-items: start;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--accent);
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+
+  .project-card:hover {
+    background: var(--surface2);
+    border-color: var(--dim);
+  }
+
+  .project-card:hover::before { opacity: 1; }
+
+  .project-card.featured { border-color: var(--dim); }
+  .project-card.featured::before { opacity: 0.4; }
+
+  .project-tag-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+    align-items: center;
+  }
+
+  .badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    padding: 3px 9px;
+    border-radius: 2px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .badge-featured { background: rgba(232,184,109,0.12); color: var(--accent); border: 1px solid rgba(232,184,109,0.3); }
+  .badge-java { background: rgba(126,184,160,0.1); color: var(--accent2); border: 1px solid rgba(126,184,160,0.25); }
+  .badge-spring { background: rgba(106,200,120,0.08); color: #6ac878; border: 1px solid rgba(106,200,120,0.2); }
+  .badge-wip { background: rgba(200,180,100,0.08); color: #c8b464; border: 1px solid rgba(200,180,100,0.2); }
+
+  .project-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    color: var(--text);
+    margin-bottom: 12px;
+    line-height: 1.1;
+  }
+
+  .project-desc {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.75;
+    margin-bottom: 24px;
+    max-width: 580px;
+  }
+
+  .project-tech {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .tech-pill {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--dim);
+    padding: 4px 11px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    background: var(--bg);
+  }
+
+  .project-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-end;
+    white-space: nowrap;
+  }
+
+  .link-btn {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 7px 14px;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .link-btn:hover {
+    color: var(--text);
+    border-color: var(--dim);
+    background: var(--surface2);
+  }
+
+  /* HIGHLIGHTS */
+  .highlights {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 60px;
+  }
+
+  .highlight-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 32px 28px;
+  }
+
+  .highlight-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 48px;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .highlight-label {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* CONTACT */
+  .contact-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .contact-text h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 36px;
+    color: var(--text);
+    margin-bottom: 16px;
+    line-height: 1.1;
+  }
+
+  .contact-text p {
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.75;
+    margin-bottom: 32px;
+  }
+
+  .contact-links { display: flex; flex-direction: column; gap: 12px; }
+
+  .contact-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 22px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .contact-row:hover {
+    background: var(--surface2);
+    border-color: var(--dim);
+  }
+
+  .contact-icon {
+    font-size: 18px;
+    width: 36px;
+    text-align: center;
+  }
+
+  .contact-info-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 3px;
+  }
+
+  .contact-info-val {
+    font-size: 14px;
+    color: var(--text);
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+
+  .footer-accent { color: var(--accent); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(22px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .hero, section { padding-left: 24px; padding-right: 24px; }
+    .about-grid, .contact-inner { grid-template-columns: 1fr; gap: 40px; }
+    .highlights { grid-template-columns: 1fr 1fr; }
+    .project-card { grid-template-columns: 1fr; }
+    .project-links { flex-direction: row; align-items: flex-start; }
+    footer { flex-direction: column; gap: 12px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">V. Vikashini</span>
+  <ul class="nav-links">
+    <li><a href="#about">about</a></li>
+    <li><a href="#projects">projects</a></li>
+    <li><a href="#contact">contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <p class="hero-label">Backend Developer · Java · Spring Boot</p>
+  <h1 class="hero-name">
+    Building<br/>
+    systems that<br/>
+    <em>just work.</em>
+  </h1>
+  <p class="hero-desc">
+    I'm <strong>Vikashini</strong> — a backend developer with a focus on clean architecture,
+    object-oriented design, and building production-ready Java applications.
+    Currently crafting full-stack learning systems and exploring the depth of Spring Boot.
+  </p>
+  <div class="hero-cta">
+    <a href="#projects" class="btn btn-primary">View Projects →</a>
+    <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+  </div>
+  <div class="hero-stack">
+    <span class="stack-label">Stack</span>
+    <div class="stack-tags">
+      <span class="tag">Java 17</span>
+      <span class="tag">Spring Boot</span>
+      <span class="tag">REST APIs</span>
+      <span class="tag">OOP</span>
+      <span class="tag">Design Patterns</span>
+      <span class="tag">DSA</span>
+      <span class="tag">MySQL</span>
+      <span class="tag">Git</span>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2 class="section-title">About</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="about-grid reveal">
+    <div class="about-text">
+      <p>
+        I'm a backend developer currently enrolled in <strong>Airtribe's intensive backend development program</strong>,
+        where I've been building real-world systems using Core Java and Spring Boot alongside
+        a disciplined study of Data Structures & Algorithms.
+      </p>
+      <p>
+        My approach to code is rooted in <strong>clean design principles</strong> — I care about
+        why code is structured a certain way, not just that it works. From design patterns like
+        Factory Method and Singleton to layered REST architecture, I build with the next developer in mind.
+      </p>
+      <p>
+        I'm actively targeting <strong>entry-level backend developer roles</strong> and looking to
+        join a team where I can contribute meaningfully from day one and grow fast.
+      </p>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-item">
+        <div class="skill-cat">Language</div>
+        <div class="skill-name">Java (Core + 17)</div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-cat">Framework</div>
+        <div class="skill-name">Spring Boot</div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-cat">Architecture</div>
+        <div class="skill-name">REST APIs</div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-cat">Concepts</div>
+        <div class="skill-name">OOP & LLD</div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-cat">Patterns</div>
+        <div class="skill-name">Design Patterns</div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-cat">Algorithms</div>
+        <div class="skill-name">DSA</div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-cat">Database</div>
+        <div class="skill-name">MySQL / JPA</div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-cat">Tooling</div>
+        <div class="skill-name">Git · IntelliJ</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="highlights reveal">
+    <div class="highlight-card">
+      <div class="highlight-num">2+</div>
+      <div class="highlight-label">Backend projects built end-to-end</div>
+    </div>
+    <div class="highlight-card">
+      <div class="highlight-num">~2</div>
+      <div class="highlight-label">DSA problems solved daily (ongoing)</div>
+    </div>
+    <div class="highlight-card">
+      <div class="highlight-num">100%</div>
+      <div class="highlight-label">Focused on backend systems & clean code</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Projects</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="projects-list">
+
+    <!-- LearnTrack -->
+    <div class="project-card featured reveal">
+      <div>
+        <div class="project-tag-row">
+          <span class="badge badge-featured">Featured</span>
+          <span class="badge badge-java">Java</span>
+          <span class="badge badge-spring">Spring Boot</span>
+        </div>
+        <h3 class="project-title">LearnTrack</h3>
+        <p class="project-desc">
+          A full-featured Learning Management System built with Spring Boot under
+          <code style="font-family:'JetBrains Mono',monospace; font-size:12px; background:var(--bg); padding:2px 6px; border-radius:2px; color:var(--accent2)">com.airtribe.learntrack</code>.
+          LearnTrack supports course creation, student enrollment, and progress tracking
+          with a clean RESTful API design. Built with a layered architecture (Controller → Service → Repository),
+          applying OOP principles and design patterns throughout.
+        </p>
+        <div class="project-tech">
+          <span class="tech-pill">Java 17</span>
+          <span class="tech-pill">Spring Boot</span>
+          <span class="tech-pill">Spring MVC</span>
+          <span class="tech-pill">JPA / Hibernate</span>
+          <span class="tech-pill">MySQL</span>
+          <span class="tech-pill">REST API</span>
+          <span class="tech-pill">Maven</span>
+        </div>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/vikashini" class="link-btn" target="_blank">
+          ⤴ GitHub
+        </a>
+      </div>
+    </div>
+
+    <!-- Geek Trust -->
+    <div class="project-card reveal">
+      <div>
+        <div class="project-tag-row">
+          <span class="badge badge-java">Java</span>
+          <span class="badge badge-spring">Spring Boot</span>
+        </div>
+        <h3 class="project-title">Geek Trust</h3>
+        <p class="project-desc">
+          A coding portfolio project tackling a real-world problem statement from Geek Trust —
+          a platform known for evaluating backend developers through system design challenges.
+          Built in Java with Spring Boot, emphasising object-oriented design,
+          clean separation of concerns, and testable code.
+        </p>
+        <div class="project-tech">
+          <span class="tech-pill">Java</span>
+          <span class="tech-pill">Spring Boot</span>
+          <span class="tech-pill">OOP</span>
+          <span class="tech-pill">Design Patterns</span>
+          <span class="tech-pill">Unit Testing</span>
+        </div>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/vikashini" class="link-btn" target="_blank">
+          ⤴ GitHub
+        </a>
+      </div>
+    </div>
+
+    <!-- Airtribe Projects -->
+    <div class="project-card reveal">
+      <div>
+        <div class="project-tag-row">
+          <span class="badge badge-java">Java</span>
+          <span class="badge badge-wip">In Progress</span>
+        </div>
+        <h3 class="project-title">Airtribe Coursework Projects</h3>
+        <p class="project-desc">
+          A series of backend modules and mini-projects built throughout the Airtribe backend
+          development curriculum. Covers Core Java fundamentals, Spring Boot application setup,
+          REST endpoint design, exception handling, database integration, and applied
+          Data Structures & Algorithms problems — all version-controlled and documented on GitHub.
+        </p>
+        <div class="project-tech">
+          <span class="tech-pill">Core Java</span>
+          <span class="tech-pill">Collections</span>
+          <span class="tech-pill">Spring Boot</span>
+          <span class="tech-pill">Exception Handling</span>
+          <span class="tech-pill">DSA</span>
+          <span class="tech-pill">Git</span>
+        </div>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/vikashini" class="link-btn" target="_blank">
+          ⤴ GitHub
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Contact</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="contact-inner reveal">
+    <div class="contact-text">
+      <h3>Open to backend<br/>developer roles.</h3>
+      <p>
+        I'm actively looking for entry-level backend developer positions where I can
+        work on meaningful systems, learn from a strong engineering team, and contribute
+        real value. If that sounds like a fit — I'd love to connect.
+      </p>
+      <a href="mailto:your@email.com" class="btn btn-primary">Say Hello →</a>
+    </div>
+    <div class="contact-links">
+      <a href="mailto:your@email.com" class="contact-row">
+        <span class="contact-icon">✉</span>
+        <div>
+          <span class="contact-info-label">Email</span>
+          <span class="contact-info-val">your@email.com</span>
+        </div>
+      </a>
+      <a href="https://github.com/vikashini" class="contact-row" target="_blank">
+        <span class="contact-icon">⌥</span>
+        <div>
+          <span class="contact-info-label">GitHub</span>
+          <span class="contact-info-val">github.com/vikashini</span>
+        </div>
+      </a>
+      <a href="https://linkedin.com/in/vikashini" class="contact-row" target="_blank">
+        <span class="contact-icon">⬡</span>
+        <div>
+          <span class="contact-info-label">LinkedIn</span>
+          <span class="contact-info-val">linkedin.com/in/vikashini</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-text">© 2026 <span class="footer-accent">Vikashini</span> — Built with intention.</span>
+  <span class="footer-text">Backend Developer · India</span>
+</footer>
+
+</div>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
