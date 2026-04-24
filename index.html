@@ -105,11 +105,50 @@
   .hero {
     min-height: 100vh;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
     padding: 120px 48px 80px;
     max-width: 1100px;
     margin: 0 auto;
+  }
+
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .hero-photo-wrap {
+    flex-shrink: 0;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.6s ease forwards;
+  }
+
+  .hero-photo {
+    width: 280px;
+    height: 340px;
+    object-fit: cover;
+    object-position: top center;
+    border: 1px solid var(--border);
+    filter: grayscale(20%);
+    display: block;
+  }
+
+  .hero-photo-frame {
+    position: relative;
+    display: inline-block;
+  }
+
+  .hero-photo-frame::after {
+    content: '';
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    right: -12px;
+    bottom: -12px;
+    border: 1px solid var(--dim);
+    z-index: -1;
   }
 
   .hero-label {
@@ -131,7 +170,7 @@
 
   .hero-name {
     font-family: 'DM Serif Display', serif;
-    font-size: clamp(56px, 9vw, 112px);
+    font-size: clamp(48px, 7vw, 96px);
     line-height: 0.95;
     letter-spacing: -0.02em;
     color: var(--text);
@@ -146,7 +185,7 @@
   }
 
   .hero-desc {
-    max-width: 540px;
+    max-width: 520px;
     font-size: 17px;
     color: var(--muted);
     line-height: 1.75;
@@ -204,7 +243,7 @@
   }
 
   .hero-stack {
-    margin-top: 80px;
+    margin-top: 72px;
     display: flex;
     align-items: center;
     gap: 20px;
@@ -315,6 +354,114 @@
     font-weight: 500;
   }
 
+  /* EXPERIENCE */
+  .exp-list { display: flex; flex-direction: column; gap: 2px; }
+
+  .exp-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 36px 44px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.25s;
+  }
+
+  .exp-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--accent2);
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+
+  .exp-card:hover {
+    background: var(--surface2);
+    border-color: var(--dim);
+  }
+
+  .exp-card:hover::before { opacity: 1; }
+
+  .exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+    margin-bottom: 6px;
+    flex-wrap: wrap;
+  }
+
+  .exp-company {
+    font-family: 'DM Serif Display', serif;
+    font-size: 24px;
+    color: var(--text);
+    line-height: 1.1;
+  }
+
+  .exp-period {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+    padding: 4px 10px;
+    border: 1px solid rgba(232,184,109,0.25);
+    background: rgba(232,184,109,0.06);
+    border-radius: 2px;
+  }
+
+  .exp-role-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .exp-role {
+    font-size: 14px;
+    color: var(--accent2);
+    font-weight: 500;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.04em;
+  }
+
+  .exp-location {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+
+  .exp-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .exp-bullets li {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.7;
+    padding-left: 20px;
+    position: relative;
+  }
+
+  .exp-bullets li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: var(--accent2);
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  .exp-bullets li strong { color: var(--text); font-weight: 500; }
+
   /* PROJECTS */
   .projects-list { display: flex; flex-direction: column; gap: 2px; }
 
@@ -373,6 +520,7 @@
   .badge-java { background: rgba(126,184,160,0.1); color: var(--accent2); border: 1px solid rgba(126,184,160,0.25); }
   .badge-spring { background: rgba(106,200,120,0.08); color: #6ac878; border: 1px solid rgba(106,200,120,0.2); }
   .badge-wip { background: rgba(200,180,100,0.08); color: #c8b464; border: 1px solid rgba(200,180,100,0.2); }
+  .badge-py { background: rgba(100,160,220,0.08); color: #64a0dc; border: 1px solid rgba(100,160,220,0.2); }
 
   .project-title {
     font-family: 'DM Serif Display', serif;
@@ -394,6 +542,7 @@
     display: flex;
     gap: 8px;
     flex-wrap: wrap;
+    margin-bottom: 20px;
   }
 
   .tech-pill {
@@ -426,12 +575,227 @@
     display: flex;
     align-items: center;
     gap: 6px;
+    cursor: pointer;
+    background: transparent;
   }
 
   .link-btn:hover {
     color: var(--text);
     border-color: var(--dim);
     background: var(--surface2);
+  }
+
+  .link-btn.readmore {
+    color: var(--accent);
+    border-color: rgba(232,184,109,0.3);
+    background: rgba(232,184,109,0.05);
+  }
+
+  .link-btn.readmore:hover {
+    background: rgba(232,184,109,0.1);
+    border-color: rgba(232,184,109,0.5);
+  }
+
+  /* MODAL */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(12,12,14,0.9);
+    backdrop-filter: blur(8px);
+    z-index: 200;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+  }
+
+  .modal-overlay.open { display: flex; }
+
+  .modal {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    max-width: 720px;
+    width: 100%;
+    max-height: 88vh;
+    overflow-y: auto;
+    position: relative;
+  }
+
+  .modal-header {
+    padding: 36px 44px 28px;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: var(--surface);
+    z-index: 1;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 18px;
+    color: var(--muted);
+    cursor: pointer;
+    background: none;
+    border: none;
+    line-height: 1;
+    transition: color 0.2s;
+  }
+
+  .modal-close:hover { color: var(--text); }
+
+  .modal-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .modal-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px;
+    color: var(--text);
+    line-height: 1.1;
+  }
+
+  .modal-body {
+    padding: 36px 44px;
+  }
+
+  .modal-section {
+    margin-bottom: 32px;
+  }
+
+  .modal-section-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent2);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .modal-section p {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.75;
+    margin-bottom: 10px;
+  }
+
+  .modal-section p strong { color: var(--text); font-weight: 500; }
+
+  .modal-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .modal-bullets li {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.7;
+    padding-left: 20px;
+    position: relative;
+  }
+
+  .modal-bullets li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+  }
+
+  .modal-bullets li strong { color: var(--text); font-weight: 500; }
+
+  .modal-tech-row { display: flex; gap: 8px; flex-wrap: wrap; }
+
+  /* EDUCATION */
+  .edu-list { display: flex; flex-direction: column; gap: 2px; }
+
+  .edu-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 36px 44px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 32px;
+    align-items: start;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .edu-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--accent);
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+
+  .edu-card:hover {
+    background: var(--surface2);
+    border-color: var(--dim);
+  }
+
+  .edu-card:hover::before { opacity: 1; }
+
+  .edu-institution {
+    font-family: 'DM Serif Display', serif;
+    font-size: 24px;
+    color: var(--text);
+    margin-bottom: 6px;
+    line-height: 1.2;
+  }
+
+  .edu-degree {
+    font-size: 15px;
+    color: var(--muted);
+    margin-bottom: 6px;
+    line-height: 1.5;
+  }
+
+  .edu-degree strong { color: var(--text); font-weight: 500; }
+
+  .edu-location {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+
+  .edu-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+  }
+
+  .edu-period {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+    padding: 4px 10px;
+    border: 1px solid rgba(232,184,109,0.25);
+    background: rgba(232,184,109,0.06);
+    border-radius: 2px;
+  }
+
+  .edu-gpa {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--accent2);
+    letter-spacing: 0.06em;
   }
 
   /* HIGHLIGHTS */
@@ -564,15 +928,24 @@
   ::-webkit-scrollbar-track { background: var(--bg); }
   ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
 
+  @media (max-width: 900px) {
+    .hero { flex-direction: column-reverse; align-items: flex-start; gap: 40px; }
+    .hero-photo { width: 180px; height: 220px; }
+    .hero-photo-frame::after { display: none; }
+  }
+
   @media (max-width: 768px) {
     nav { padding: 16px 24px; }
     .nav-links { display: none; }
     .hero, section { padding-left: 24px; padding-right: 24px; }
     .about-grid, .contact-inner { grid-template-columns: 1fr; gap: 40px; }
     .highlights { grid-template-columns: 1fr 1fr; }
-    .project-card { grid-template-columns: 1fr; }
+    .project-card, .edu-card { grid-template-columns: 1fr; }
     .project-links { flex-direction: row; align-items: flex-start; }
     footer { flex-direction: column; gap: 12px; text-align: center; }
+    .exp-header { flex-direction: column; gap: 8px; }
+    .modal-header, .modal-body { padding-left: 24px; padding-right: 24px; }
+    .edu-meta { align-items: flex-start; }
   }
 </style>
 </head>
@@ -584,39 +957,48 @@
   <span class="nav-logo">Vikashini K</span>
   <ul class="nav-links">
     <li><a href="#about">about</a></li>
+    <li><a href="#experience">experience</a></li>
     <li><a href="#projects">projects</a></li>
+    <li><a href="#education">education</a></li>
     <li><a href="#contact">contact</a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
 <div class="hero">
-  <p class="hero-label">Backend Developer · Java · Spring Boot</p>
-  <h1 class="hero-name">
-    Building<br/>
-    systems that<br/>
-    <em>just work.</em>
-  </h1>
-  <p class="hero-desc">
-    I'm <strong>Vikashini</strong> — a backend developer with a focus on clean architecture,
-    object-oriented design, and building production-ready Java applications.
-    Currently crafting full-stack learning systems and exploring the depth of Spring Boot.
-  </p>
-  <div class="hero-cta">
-    <a href="#projects" class="btn btn-primary">View Projects →</a>
-    <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+  <div class="hero-content">
+    <p class="hero-label">Backend Developer · Java · Spring Boot</p>
+    <h1 class="hero-name">
+      Building<br/>
+      systems that<br/>
+      <em>just work.</em>
+    </h1>
+    <p class="hero-desc">
+      I'm <strong>Vikashini</strong> — a backend developer and support engineer with
+      hands-on production experience at BlueYonder, a focus on clean architecture,
+      and a track record of building reliable Java applications.
+    </p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">View Projects →</a>
+      <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+    </div>
+    <div class="hero-stack">
+      <span class="stack-label">Stack</span>
+      <div class="stack-tags">
+        <span class="tag">Java</span>
+        <span class="tag">Spring Boot</span>
+        <span class="tag">Python</span>
+        <span class="tag">REST APIs</span>
+        <span class="tag">PostgreSQL</span>
+        <span class="tag">JWT</span>
+        <span class="tag">JIRA</span>
+        <span class="tag">Git</span>
+      </div>
+    </div>
   </div>
-  <div class="hero-stack">
-    <span class="stack-label">Stack</span>
-    <div class="stack-tags">
-      <span class="tag">Java 25</span>
-      <span class="tag">Spring Boot</span>
-      <span class="tag">REST APIs</span>
-      <span class="tag">OOP</span>
-      <span class="tag">Design Patterns</span>
-      <span class="tag">DSA</span>
-      <span class="tag">MySQL</span>
-      <span class="tag">Git</span>
+  <div class="hero-photo-wrap">
+    <div class="hero-photo-frame">
+      <img src="assets/profile.png" alt="Vikashini Karuppusamy" class="hero-photo" />
     </div>
   </div>
 </div>
@@ -631,24 +1013,25 @@
   <div class="about-grid reveal">
     <div class="about-text">
       <p>
-        I'm a backend developer currently enrolled in <strong>Airtribe's intensive backend development program</strong>,
-        where I've been building real-world systems using Core Java and Spring Boot alongside
-        a disciplined study of Data Structures & Algorithms.
+        I'm a backend-focused engineer with over a year of production experience at
+        <strong>BlueYonder</strong>, where I debugged complex incidents across distributed
+        TMS modules, wrote Python automation scripts, and maintained 98%+ SLA compliance
+        for enterprise accounts.
       </p>
       <p>
         My approach to code is rooted in <strong>clean design principles</strong> — I care about
         why code is structured a certain way, not just that it works. From design patterns like
-        Factory Method and Singleton to layered REST architecture, I build with the next developer in mind.
+        Factory Method and Observer to layered REST architecture, I build with the next developer in mind.
       </p>
       <p>
-        I'm actively targeting <strong>entry-level backend developer roles</strong> and looking to
+        I'm actively targeting <strong>SDE1 backend developer roles</strong> and looking to
         join a team where I can contribute meaningfully from day one and grow fast.
       </p>
     </div>
     <div class="skills-grid">
       <div class="skill-item">
         <div class="skill-cat">Language</div>
-        <div class="skill-name">Java (Core + 25)</div>
+        <div class="skill-name">Java · Python</div>
       </div>
       <div class="skill-item">
         <div class="skill-cat">Framework</div>
@@ -667,47 +1050,92 @@
         <div class="skill-name">Design Patterns</div>
       </div>
       <div class="skill-item">
-        <div class="skill-cat">Algorithms</div>
-        <div class="skill-name">DSA</div>
+        <div class="skill-cat">Security</div>
+        <div class="skill-name">JWT · Spring Security</div>
       </div>
       <div class="skill-item">
         <div class="skill-cat">Database</div>
-        <div class="skill-name">MySQL / JPA</div>
+        <div class="skill-name">PostgreSQL · MySQL</div>
       </div>
       <div class="skill-item">
         <div class="skill-cat">Tooling</div>
-        <div class="skill-name">Git · IntelliJ</div>
+        <div class="skill-name">Git · JIRA · Maven</div>
       </div>
     </div>
   </div>
 
   <div class="highlights reveal">
     <div class="highlight-card">
-      <div class="highlight-num">2+</div>
-      <div class="highlight-label">Backend projects built end-to-end</div>
+      <div class="highlight-num">500+</div>
+      <div class="highlight-label">Production incidents debugged & resolved</div>
     </div>
     <div class="highlight-card">
-      <div class="highlight-num">~2</div>
-      <div class="highlight-label">DSA problems solved daily (ongoing)</div>
+      <div class="highlight-num">98%+</div>
+      <div class="highlight-label">SLA compliance across enterprise accounts</div>
     </div>
     <div class="highlight-card">
-      <div class="highlight-num">100%</div>
-      <div class="highlight-label">Focused on backend systems & clean code</div>
+      <div class="highlight-num">30%</div>
+      <div class="highlight-label">Reduction in repeated incidents via automation</div>
     </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Experience</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="exp-list">
+
+    <!-- BlueYonder Full-time -->
+    <div class="exp-card reveal">
+      <div class="exp-header">
+        <span class="exp-company">BlueYonder</span>
+        <span class="exp-period">July 2024 – July 2025</span>
+      </div>
+      <div class="exp-role-row">
+        <span class="exp-role">Associate Support Engineer</span>
+        <span class="exp-location">Bengaluru, KA</span>
+      </div>
+      <ul class="exp-bullets">
+        <li>Debugged and resolved <strong>500+ production incidents</strong> across distributed TMS modules (T Planner, Auction, Financials) by reading application logs, tracing call flows, and identifying root causes at the code and data layer.</li>
+        <li>Wrote <strong>Python automation scripts</strong> to detect recurring incident patterns, cutting manual triage effort by ~3 hrs/week and reducing repeated incidents by <strong>30%</strong>.</li>
+        <li>Raised high-quality JIRA defect reports with reproduction steps, log excerpts, and proposed fixes; deployed provided patches during scheduled downtime.</li>
+        <li>Maintained <strong>98%+ SLA compliance</strong> across two enterprise accounts (P&amp;G, Baxter) through structured incident prioritisation and root cause analysis.</li>
+      </ul>
+    </div>
+
+    <!-- BlueYonder Intern -->
+    <div class="exp-card reveal">
+      <div class="exp-header">
+        <span class="exp-company">BlueYonder</span>
+        <span class="exp-period">January 2024 – June 2024</span>
+      </div>
+      <div class="exp-role-row">
+        <span class="exp-role">Support Engineer Intern</span>
+        <span class="exp-location">Bengaluru, KA</span>
+      </div>
+      <ul class="exp-bullets">
+        <li>Investigated production incidents via application logs and monitoring tools; applied systematic debugging to achieve a <strong>20% reduction in MTTR</strong> and a <strong>25% drop</strong> in high-severity escalations.</li>
+      </ul>
+    </div>
+
   </div>
 </section>
 
 <!-- PROJECTS -->
 <section id="projects">
   <div class="section-header">
-    <span class="section-num">02</span>
+    <span class="section-num">03</span>
     <h2 class="section-title">Projects</h2>
     <div class="section-line"></div>
   </div>
 
   <div class="projects-list">
 
-    <!-- LearnTrack -->
+    <!-- To-Do App -->
     <div class="project-card featured reveal">
       <div>
         <div class="project-tag-row">
@@ -715,13 +1143,67 @@
           <span class="badge badge-java">Java</span>
           <span class="badge badge-spring">Spring Boot</span>
         </div>
-        <h3 class="project-title">LearnTrack</h3>
+        <h3 class="project-title">To-Do / Task Management App</h3>
         <p class="project-desc">
-          A full-featured Learning Management System built with Spring Boot under
-          <code style="font-family:'JetBrains Mono',monospace; font-size:12px; background:var(--bg); padding:2px 6px; border-radius:2px; color:var(--accent2)">com.airtribe.learntrack</code>.
-          LearnTrack supports course creation, student enrollment, and progress tracking
-          with a clean RESTful API design. Built with a layered architecture (Controller → Service → Repository),
-          applying OOP principles and design patterns throughout.
+          A full-stack task management application with a Spring Boot REST API backend featuring
+          JWT-based stateless authentication and role-based endpoint security via Spring Security.
+          Designed with a normalised PostgreSQL schema and a clean layered architecture.
+        </p>
+        <div class="project-tech">
+          <span class="tech-pill">Spring Boot</span>
+          <span class="tech-pill">PostgreSQL</span>
+          <span class="tech-pill">JWT</span>
+          <span class="tech-pill">Spring Security</span>
+          <span class="tech-pill">REST APIs</span>
+          <span class="tech-pill">JPA / Hibernate</span>
+          <span class="tech-pill">Maven</span>
+        </div>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/vikashinikaruppusamyk" class="link-btn" target="_blank">⤴ GitHub</a>
+        <button class="link-btn readmore" onclick="openModal('todo')">+ Read More</button>
+      </div>
+    </div>
+
+    <!-- Library Management System -->
+    <div class="project-card reveal">
+      <div>
+        <div class="project-tag-row">
+          <span class="badge badge-java">Java</span>
+        </div>
+        <h3 class="project-title">Library Management System</h3>
+        <p class="project-desc">
+          A fully OOP-driven library system implementing Factory, Observer, and Repository design patterns.
+          Handles inventory management, patron tracking, multi-criteria book search, and automated
+          notifications — all with structured logging via SLF4J.
+        </p>
+        <div class="project-tech">
+          <span class="tech-pill">Java 25</span>
+          <span class="tech-pill">OOP</span>
+          <span class="tech-pill">Design Patterns</span>
+          <span class="tech-pill">SLF4J</span>
+          <span class="tech-pill">File I/O</span>
+          <span class="tech-pill">SOLID</span>
+        </div>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/vikashinikaruppusamyk" class="link-btn" target="_blank">⤴ GitHub</a>
+        <button class="link-btn readmore" onclick="openModal('library')">+ Read More</button>
+      </div>
+    </div>
+
+    <!-- LearnTrack -->
+    <div class="project-card reveal">
+      <div>
+        <div class="project-tag-row">
+          <span class="badge badge-java">Java</span>
+          <span class="badge badge-spring">Spring Boot</span>
+        </div>
+        <h3 class="project-title">LearnTrack — LMS</h3>
+        <p class="project-desc">
+          A Learning Management System built under a layered Spring Boot architecture.
+          Supports course creation, student enrollment, and progress tracking with a clean
+          RESTful API design. Applies OOP principles and design patterns throughout.
         </p>
         <div class="project-tech">
           <span class="tech-pill">Java 17</span>
@@ -734,78 +1216,66 @@
         </div>
       </div>
       <div class="project-links">
-        <a href="https://github.com/vikashini" class="link-btn" target="_blank">
-          ⤴ GitHub
-        </a>
+        <a href="https://github.com/vikashinikaruppusamyk" class="link-btn" target="_blank">⤴ GitHub</a>
+        <button class="link-btn readmore" onclick="openModal('learntrack')">+ Read More</button>
       </div>
     </div>
 
-    <!-- Geek Trust -->
+    <!-- MediTrack -->
     <div class="project-card reveal">
       <div>
         <div class="project-tag-row">
           <span class="badge badge-java">Java</span>
-          <span class="badge badge-spring">Spring Boot</span>
         </div>
-        <h3 class="project-title">Geek Trust</h3>
+        <h3 class="project-title">MediTrack — Clinic Appointment System</h3>
         <p class="project-desc">
-          A coding portfolio project tackling a real-world problem statement from Geek Trust —
-          a platform known for evaluating backend developers through system design challenges.
-          Built in Java with Spring Boot, emphasising object-oriented design,
-          clean separation of concerns, and testable code.
-        </p>
-        <div class="project-tech">
-          <span class="tech-pill">Java</span>
-          <span class="tech-pill">Spring Boot</span>
-          <span class="tech-pill">OOP</span>
-          <span class="tech-pill">Design Patterns</span>
-          <span class="tech-pill">Unit Testing</span>
-        </div>
-      </div>
-      <div class="project-links">
-        <a href="https://github.com/vikashini" class="link-btn" target="_blank">
-          ⤴ GitHub
-        </a>
-      </div>
-    </div>
-
-    <!-- Airtribe Projects -->
-    <div class="project-card reveal">
-      <div>
-        <div class="project-tag-row">
-          <span class="badge badge-java">Java</span>
-          <span class="badge badge-wip">In Progress</span>
-        </div>
-        <h3 class="project-title">Airtribe Coursework Projects</h3>
-        <p class="project-desc">
-          A series of backend modules and mini-projects built throughout the Airtribe backend
-          development curriculum. Covers Core Java fundamentals, Spring Boot application setup,
-          REST endpoint design, exception handling, database integration, and applied
-          Data Structures & Algorithms problems — all version-controlled and documented on GitHub.
+          A clinic appointment scheduling system built with pure Core Java — no framework dependencies.
+          Demonstrates deep Java fundamentals: file-based persistence, Java 8+ streams,
+          functional interfaces, and defensive exception handling.
         </p>
         <div class="project-tech">
           <span class="tech-pill">Core Java</span>
+          <span class="tech-pill">Java 8+ Streams</span>
+          <span class="tech-pill">File I/O</span>
           <span class="tech-pill">Collections</span>
-          <span class="tech-pill">Spring Boot</span>
           <span class="tech-pill">Exception Handling</span>
-          <span class="tech-pill">DSA</span>
-          <span class="tech-pill">Git</span>
         </div>
       </div>
       <div class="project-links">
-        <a href="https://github.com/vikashini" class="link-btn" target="_blank">
-          ⤴ GitHub
-        </a>
+        <a href="https://github.com/vikashinikaruppusamyk" class="link-btn" target="_blank">⤴ GitHub</a>
+        <button class="link-btn readmore" onclick="openModal('meditrack')">+ Read More</button>
       </div>
     </div>
 
   </div>
 </section>
 
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <h2 class="section-title">Education</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="edu-list">
+    <div class="edu-card reveal">
+      <div>
+        <div class="edu-institution">Sri Krishna College of Engineering and Technology</div>
+        <div class="edu-degree"><strong>Bachelor of Technology</strong> in Information Technology</div>
+        <div class="edu-location">Coimbatore, TN</div>
+      </div>
+      <div class="edu-meta">
+        <span class="edu-period">Sept 2020 – April 2024</span>
+        <span class="edu-gpa">GPA 8.75 / 10</span>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- CONTACT -->
 <section id="contact">
   <div class="section-header">
-    <span class="section-num">03</span>
+    <span class="section-num">05</span>
     <h2 class="section-title">Contact</h2>
     <div class="section-line"></div>
   </div>
@@ -813,11 +1283,11 @@
     <div class="contact-text">
       <h3>Open to backend<br/>developer roles.</h3>
       <p>
-        I'm actively looking for entry-level backend developer positions where I can
+        I'm actively looking for SDE1 backend developer positions where I can
         work on meaningful systems, learn from a strong engineering team, and contribute
-        real value. If that sounds like a fit — I'd love to connect.
+        real value from day one. If that sounds like a fit — I'd love to connect.
       </p>
-      <a href="mailto:your@email.com" class="btn btn-primary">Say Hello →</a>
+      <a href="mailto:vikashinikaruppusamyk@gmail.com" class="btn btn-primary">Say Hello →</a>
     </div>
     <div class="contact-links">
       <a href="mailto:vikashinikaruppusamyk@gmail.com" class="contact-row">
@@ -852,6 +1322,212 @@
 
 </div>
 
+<!-- MODALS -->
+
+<!-- To-Do App Modal -->
+<div class="modal-overlay" id="modal-todo" onclick="closeOnOverlay(event, 'todo')">
+  <div class="modal">
+    <div class="modal-header">
+      <button class="modal-close" onclick="closeModal('todo')">✕</button>
+      <div class="modal-label">// Case Study</div>
+      <h2 class="modal-title">To-Do / Task Management App</h2>
+    </div>
+    <div class="modal-body">
+      <div class="modal-section">
+        <div class="modal-section-title">Overview</div>
+        <p>A production-grade full-stack task management application demonstrating modern backend architecture patterns. The system handles user authentication, task CRUD operations, and role-based access control — all within a clean Spring Boot backend.</p>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-title">Problem Statement</div>
+        <p>Build a secure, scalable task management API that supports multiple users with isolated data, stateless authentication, and protected endpoints — while keeping the codebase maintainable and extensible.</p>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-title">Architecture</div>
+        <ul class="modal-bullets">
+          <li><strong>Controller → Service → Repository</strong> layered architecture for clean separation of concerns</li>
+          <li><strong>JWT-based stateless auth</strong> — no server-side session state, tokens carry user identity and roles</li>
+          <li><strong>Spring Security</strong> for endpoint protection with role-based access control</li>
+          <li><strong>Normalised PostgreSQL schema</strong> with JPA/Hibernate for ORM — entities mapped with proper relationships</li>
+          <li>Vanilla JS frontend consuming the REST API as a separate client layer</li>
+        </ul>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-title">Key Engineering Decisions</div>
+        <ul class="modal-bullets">
+          <li>Chose <strong>JWT over sessions</strong> for stateless scalability — each request is self-contained</li>
+          <li>Used <strong>Spring Security's filter chain</strong> to intercept and validate tokens before hitting controllers</li>
+          <li>Designed schema with foreign keys and constraints to enforce data integrity at the DB layer</li>
+          <li>Structured DTOs separately from entities to decouple API surface from DB schema</li>
+        </ul>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-title">Tech Stack</div>
+        <div class="modal-tech-row">
+          <span class="tech-pill">Spring Boot</span>
+          <span class="tech-pill">PostgreSQL</span>
+          <span class="tech-pill">JWT</span>
+          <span class="tech-pill">Spring Security</span>
+          <span class="tech-pill">JPA / Hibernate</span>
+          <span class="tech-pill">REST APIs</span>
+          <span class="tech-pill">Maven</span>
+          <span class="tech-pill">Vanilla JS</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Library Management System Modal -->
+<div class="modal-overlay" id="modal-library" onclick="closeOnOverlay(event, 'library')">
+  <div class="modal">
+    <div class="modal-header">
+      <button class="modal-close" onclick="closeModal('library')">✕</button>
+      <div class="modal-label">// Case Study</div>
+      <h2 class="modal-title">Library Management System</h2>
+    </div>
+    <div class="modal-body">
+      <div class="modal-section">
+        <div class="modal-section-title">Overview</div>
+        <p>A fully OOP-driven library management system that demonstrates mastery of classic design patterns and SOLID principles — built in pure Java without any web framework, to show strength at the language level.</p>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-title">Problem Statement</div>
+        <p>Model a real-world library with inventory control, patron management, borrowing workflows, and automated notifications — all in a way that's extensible, testable, and following best OOP practices.</p>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-title">Design Patterns Applied</div>
+        <ul class="modal-bullets">
+          <li><strong>Factory Pattern</strong> — for creating different types of library items (books, magazines) without coupling callers to concrete classes</li>
+          <li><strong>Observer Pattern</strong> — automated notifications to patrons when reserved books become available</li>
+          <li><strong>Repository Pattern</strong> — abstracted data access layer that separates persistence logic from business logic</li>
+        </ul>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-title">Key Features</div>
+        <ul class="modal-bullets">
+          <li>Inventory management — add, remove, update, and search books by multiple criteria</li>
+          <li>Patron lifecycle tracking — borrow, return, and overdue management</li>
+          <li>File-based persistence — data survives restarts without a database dependency</li>
+          <li>Structured logging with <strong>SLF4J</strong> for production-style observability</li>
+        </ul>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-title">Tech Stack</div>
+        <div class="modal-tech-row">
+          <span class="tech-pill">Java 25</span>
+          <span class="tech-pill">OOP</span>
+          <span class="tech-pill">Design Patterns</span>
+          <span class="tech-pill">SOLID</span>
+          <span class="tech-pill">SLF4J</span>
+          <span class="tech-pill">File I/O</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LearnTrack Modal -->
+<div class="modal-overlay" id="modal-learntrack" onclick="closeOnOverlay(event, 'learntrack')">
+  <div class="modal">
+    <div class="modal-header">
+      <button class="modal-close" onclick="closeModal('learntrack')">✕</button>
+      <div class="modal-label">// Case Study</div>
+      <h2 class="modal-title">LearnTrack — Learning Management System</h2>
+    </div>
+    <div class="modal-body">
+      <div class="modal-section">
+        <div class="modal-section-title">Overview</div>
+        <p>A Learning Management System REST API built with Spring Boot that handles course lifecycle, student enrollment, and progress tracking — designed as a production-style backend service with a clean layered architecture.</p>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-title">Problem Statement</div>
+        <p>Build a multi-entity backend system where instructors can create courses, students can enroll and track progress, and the system enforces business rules (e.g., enrollment limits, course status transitions).</p>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-title">Architecture</div>
+        <ul class="modal-bullets">
+          <li><strong>Controller → Service → Repository</strong> layers with strict boundaries — no business logic leaking into controllers</li>
+          <li>JPA entities with proper <strong>relationship mappings</strong> (OneToMany, ManyToMany for enrollments)</li>
+          <li>Service layer enforces business rules — enrollment status transitions, capacity checks</li>
+          <li>REST endpoints follow resource-oriented design with correct HTTP verbs and status codes</li>
+        </ul>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-title">Key Features</div>
+        <ul class="modal-bullets">
+          <li>Course management — create, activate, deactivate with status lifecycle</li>
+          <li>Student management — registration, profile, deactivation</li>
+          <li>Enrollment system — enroll, cancel, complete with status tracking</li>
+          <li>Search and filter endpoints for both courses and students</li>
+        </ul>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-title">Tech Stack</div>
+        <div class="modal-tech-row">
+          <span class="tech-pill">Java 17</span>
+          <span class="tech-pill">Spring Boot</span>
+          <span class="tech-pill">Spring MVC</span>
+          <span class="tech-pill">JPA / Hibernate</span>
+          <span class="tech-pill">MySQL</span>
+          <span class="tech-pill">REST API</span>
+          <span class="tech-pill">Maven</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MediTrack Modal -->
+<div class="modal-overlay" id="modal-meditrack" onclick="closeOnOverlay(event, 'meditrack')">
+  <div class="modal">
+    <div class="modal-header">
+      <button class="modal-close" onclick="closeModal('meditrack')">✕</button>
+      <div class="modal-label">// Case Study</div>
+      <h2 class="modal-title">MediTrack — Clinic Appointment System</h2>
+    </div>
+    <div class="modal-body">
+      <div class="modal-section">
+        <div class="modal-section-title">Overview</div>
+        <p>A clinic appointment scheduling system built in pure Core Java — no Spring, no framework. The deliberate constraint demonstrates depth in Java fundamentals and the ability to reason about system design without relying on framework abstractions.</p>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-title">Problem Statement</div>
+        <p>Model a clinic's appointment workflow — patient registration, doctor availability, appointment booking, and cancellations — with persistent state across sessions using file I/O.</p>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-title">Technical Highlights</div>
+        <ul class="modal-bullets">
+          <li><strong>Java 8+ Streams</strong> for filtering, mapping, and aggregating appointment data functionally</li>
+          <li><strong>File-based persistence</strong> — serialised state that survives restarts without a DB dependency</li>
+          <li>Comprehensive <strong>exception handling</strong> with meaningful error messages at every boundary</li>
+          <li>Domain-driven class design — separate entities, services, and I/O handlers</li>
+          <li>Java Collections framework used idiomatically for scheduling logic</li>
+        </ul>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-title">Key Features</div>
+        <ul class="modal-bullets">
+          <li>Patient registration and profile management</li>
+          <li>Doctor schedule and availability management</li>
+          <li>Appointment booking, rescheduling, and cancellation</li>
+          <li>Menu-driven CLI interface with input validation</li>
+        </ul>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-title">Tech Stack</div>
+        <div class="modal-tech-row">
+          <span class="tech-pill">Core Java</span>
+          <span class="tech-pill">Java 8+ Streams</span>
+          <span class="tech-pill">File I/O</span>
+          <span class="tech-pill">Collections</span>
+          <span class="tech-pill">Exception Handling</span>
+          <span class="tech-pill">OOP</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
   // Scroll reveal
   const reveals = document.querySelectorAll('.reveal');
@@ -861,6 +1537,30 @@
     });
   }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
   reveals.forEach(el => observer.observe(el));
+
+  // Modal controls
+  function openModal(id) {
+    document.getElementById('modal-' + id).classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal(id) {
+    document.getElementById('modal-' + id).classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function closeOnOverlay(event, id) {
+    if (event.target === event.currentTarget) closeModal(id);
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal-overlay.open').forEach(m => {
+        m.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    }
+  });
 </script>
 </body>
 </html>
