@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -133,6 +132,19 @@
     border: 1px solid var(--border);
     filter: grayscale(20%);
     display: block;
+  }
+
+  .photo-fallback {
+    width: 280px;
+    height: 340px;
+    border: 1px solid var(--border);
+    background: var(--surface2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Serif Display', serif;
+    font-size: 88px;
+    color: var(--accent);
   }
 
   .hero-photo-frame {
@@ -969,14 +981,15 @@
   <div class="hero-content">
     <p class="hero-label">Backend Developer · Java · Spring Boot</p>
     <h1 class="hero-name">
-      Building<br/>
-      systems that<br/>
-      <em>just work.</em>
+      Backend systems,<br/>
+      built to<br/>
+      <em>stay correct.</em>
     </h1>
     <p class="hero-desc">
-      I'm <strong>Vikashini</strong> — a backend developer and support engineer with
-      hands-on production experience at BlueYonder, a focus on clean architecture,
-      and a track record of building reliable Java applications.
+      I'm <strong>Vikashini</strong> — a backend developer who likes turning messy,
+      real-world problems into clean, dependable systems. I spent the last year writing
+      <strong>Java and Spring Boot</strong> services at <strong>Blue Yonder</strong>, and I'm
+      happiest when the thing I built just keeps working — quietly, in the background.
     </p>
     <div class="hero-cta">
       <a href="#projects" class="btn btn-primary">View Projects →</a>
@@ -987,18 +1000,19 @@
       <div class="stack-tags">
         <span class="tag">Java</span>
         <span class="tag">Spring Boot</span>
-        <span class="tag">Python</span>
+        <span class="tag">Apache Kafka</span>
+        <span class="tag">Redis</span>
         <span class="tag">REST APIs</span>
         <span class="tag">PostgreSQL</span>
+        <span class="tag">Docker</span>
         <span class="tag">JWT</span>
-        <span class="tag">JIRA</span>
         <span class="tag">Git</span>
       </div>
     </div>
   </div>
   <div class="hero-photo-wrap">
     <div class="hero-photo-frame">
-      <img src="assets/profilepic.jpeg" alt="Vikashini Karuppusamy" class="hero-photo" />
+      <img src="assets/profilepic.jpeg" alt="Vikashini Karuppusamy" class="hero-photo" onerror="this.onerror=null;this.outerHTML='&lt;div class=&quot;photo-fallback&quot;&gt;VK&lt;/div&gt;';" />
     </div>
   </div>
 </div>
@@ -1013,45 +1027,45 @@
   <div class="about-grid reveal">
     <div class="about-text">
       <p>
-        I'm a backend-focused engineer with over a year of production experience at
-        <strong>BlueYonder</strong>, where I debugged complex incidents across distributed
-        TMS modules, wrote Python automation scripts, and maintained 98%+ SLA compliance
-        for enterprise accounts.
+        I'm a backend-focused engineer with over a year of experience at
+        <strong>Blue Yonder</strong>, where I worked on the <strong>TMS core product</strong> with the
+        Execution &amp; Lifecycle team — building internal monitoring dashboards and the Spring Boot
+        REST endpoints behind them to track live shipment state and catch SLA breaches.
       </p>
       <p>
-        My approach to code is rooted in <strong>clean design principles</strong> — I care about
-        why code is structured a certain way, not just that it works. From design patterns like
-        Factory Method and Observer to layered REST architecture, I build with the next developer in mind.
+        Day to day I worked with <strong>Java 17, Spring Boot, JPA, Redis, and Apache Kafka</strong>,
+        and I care about <strong>why</strong> code is structured a certain way, not just that it runs —
+        from layered REST architecture to atomic transactions and clean DTO boundaries.
       </p>
       <p>
-        I'm actively targeting <strong>SDE1 backend developer roles</strong> and looking to
+        I'm actively targeting <strong>SDE-1 backend developer roles</strong> and looking to
         join a team where I can contribute meaningfully from day one and grow fast.
       </p>
     </div>
     <div class="skills-grid">
       <div class="skill-item">
         <div class="skill-cat">Language</div>
-        <div class="skill-name">Java · Python</div>
+        <div class="skill-name">Java · SQL · Python</div>
       </div>
       <div class="skill-item">
         <div class="skill-cat">Framework</div>
-        <div class="skill-name">Spring Boot</div>
+        <div class="skill-name">Spring Boot · JPA</div>
       </div>
       <div class="skill-item">
         <div class="skill-cat">Architecture</div>
-        <div class="skill-name">REST APIs</div>
+        <div class="skill-name">REST APIs · DTOs</div>
       </div>
       <div class="skill-item">
-        <div class="skill-cat">Concepts</div>
-        <div class="skill-name">OOP & LLD</div>
-      </div>
-      <div class="skill-item">
-        <div class="skill-cat">Patterns</div>
-        <div class="skill-name">Design Patterns</div>
+        <div class="skill-cat">Messaging / Cache</div>
+        <div class="skill-name">Apache Kafka · Redis</div>
       </div>
       <div class="skill-item">
         <div class="skill-cat">Security</div>
         <div class="skill-name">JWT · Spring Security</div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-cat">Testing</div>
+        <div class="skill-name">JUnit 5 · Mockito</div>
       </div>
       <div class="skill-item">
         <div class="skill-cat">Database</div>
@@ -1059,23 +1073,23 @@
       </div>
       <div class="skill-item">
         <div class="skill-cat">Tooling</div>
-        <div class="skill-name">Git · JIRA · Maven</div>
+        <div class="skill-name">Git · Docker · Maven</div>
       </div>
     </div>
   </div>
 
   <div class="highlights reveal">
     <div class="highlight-card">
-      <div class="highlight-num">500+</div>
-      <div class="highlight-label">Production incidents debugged & resolved</div>
+      <div class="highlight-num">35%</div>
+      <div class="highlight-label">Lower API latency via JPA pagination &amp; filtering</div>
     </div>
     <div class="highlight-card">
-      <div class="highlight-num">98%+</div>
-      <div class="highlight-label">SLA compliance across enterprise accounts</div>
+      <div class="highlight-num">45%</div>
+      <div class="highlight-label">Fewer duplicate DB calls with Redis caching</div>
     </div>
     <div class="highlight-card">
-      <div class="highlight-num">30%</div>
-      <div class="highlight-label">Reduction in repeated incidents via automation</div>
+      <div class="highlight-num">80%+</div>
+      <div class="highlight-label">Test coverage across core service layers</div>
     </div>
   </div>
 </section>
@@ -1092,7 +1106,7 @@
     <!-- BlueYonder Full-time -->
     <div class="exp-card reveal">
       <div class="exp-header">
-        <span class="exp-company">BlueYonder</span>
+        <span class="exp-company">Blue Yonder</span>
         <span class="exp-period">July 2024 – July 2025</span>
       </div>
       <div class="exp-role-row">
@@ -1100,25 +1114,26 @@
         <span class="exp-location">Bengaluru, KA</span>
       </div>
       <ul class="exp-bullets">
-        <li>Debugged and resolved <strong>500+ production incidents</strong> across distributed TMS modules (T Planner, Auction, Financials) by reading application logs, tracing call flows, and identifying root causes at the code and data layer.</li>
-        <li>Wrote <strong>Python automation scripts</strong> to detect recurring incident patterns, cutting manual triage effort by ~3 hrs/week and reducing repeated incidents by <strong>30%</strong>.</li>
-        <li>Raised high-quality JIRA defect reports with reproduction steps, log excerpts, and proposed fixes; deployed provided patches during scheduled downtime.</li>
-        <li>Maintained <strong>98%+ SLA compliance</strong> across two enterprise accounts (P&amp;G, Baxter) through structured incident prioritisation and root cause analysis.</li>
+        <li>Built and maintained internal monitoring dashboards for the <strong>TMS core product</strong> (Execution &amp; Lifecycle team), tracking live shipment state transitions (Open → Planned → Tendered → In Transit → Completed) to catch <strong>SLA breaches</strong>; built the powering REST endpoints in <strong>Java 17</strong> and <strong>Spring Boot</strong>.</li>
+        <li>Added <strong>Spring Data JPA pagination</strong> and dynamic filtering to avoid direct querying of large production logs, cutting average API response latency by <strong>35%</strong>.</li>
+        <li>Cached slow-moving carrier tariff data with <strong>Spring @Cacheable</strong> and <strong>Redis</strong>, keeping repetitive dashboard refreshes off the primary PostgreSQL database and reducing duplicate DB calls by <strong>45%</strong>.</li>
+        <li>Integrated <strong>Apache Kafka</strong> listeners to capture real-time driver check-in/out events, auto-flagging stuck loads on missed milestones; mapped all payloads and API responses through <strong>DTOs</strong> to keep internal schemas hidden from the frontend.</li>
       </ul>
     </div>
 
     <!-- BlueYonder Intern -->
     <div class="exp-card reveal">
       <div class="exp-header">
-        <span class="exp-company">BlueYonder</span>
+        <span class="exp-company">Blue Yonder</span>
         <span class="exp-period">January 2024 – June 2024</span>
       </div>
       <div class="exp-role-row">
-        <span class="exp-role">Support Engineer Intern</span>
+        <span class="exp-role">Associate Support Engineer Intern</span>
         <span class="exp-location">Bengaluru, KA</span>
       </div>
       <ul class="exp-bullets">
-        <li>Investigated production incidents via application logs and monitoring tools; applied systematic debugging to achieve a <strong>20% reduction in MTTR</strong> and a <strong>25% drop</strong> in high-severity escalations.</li>
+        <li>Built <strong>CRUD endpoints</strong> in Spring Boot to manage static master-data tables (support agent profiles, shifts, carrier categories).</li>
+        <li>Wrote unit and integration tests with <strong>JUnit 5</strong> and <strong>Mockito</strong>, mocking external dependencies and covering route-matching and assignment logic, reaching <strong>80%+ coverage</strong> across core service layers.</li>
       </ul>
     </div>
 
@@ -1135,7 +1150,7 @@
 
   <div class="projects-list">
 
-    <!-- To-Do App -->
+    <!-- PayFlow API -->
     <div class="project-card featured reveal">
       <div>
         <div class="project-tag-row">
@@ -1143,24 +1158,54 @@
           <span class="badge badge-java">Java</span>
           <span class="badge badge-spring">Spring Boot</span>
         </div>
-        <h3 class="project-title">To-Do / Task Management App</h3>
+        <h3 class="project-title">PayFlow API — UPI-style Digital Wallet</h3>
         <p class="project-desc">
-          A full-stack task management application with a Spring Boot REST API backend featuring
-          JWT-based stateless authentication and role-based endpoint security via Spring Security.
-          Designed with a normalised PostgreSQL schema and a clean layered architecture.
+          A UPI-style digital wallet REST API focused on transactional correctness. Peer-to-peer
+          transfers are made atomic with @Transactional, server-side validation rejects invalid or
+          insufficient-balance transfers with structured HTTP errors, and every transfer is persisted
+          as an immutable transaction record for a full audit trail.
+        </p>
+        <div class="project-tech">
+          <span class="tech-pill">Java</span>
+          <span class="tech-pill">Spring Boot</span>
+          <span class="tech-pill">Spring Data JPA</span>
+          <span class="tech-pill">H2 Database</span>
+          <span class="tech-pill">REST API</span>
+          <span class="tech-pill">Maven</span>
+        </div>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/vikashinikaruppusamyk/payflow-api" class="link-btn" target="_blank">⤴ GitHub</a>
+        <button class="link-btn readmore" onclick="openModal('payflow')">+ Read More</button>
+      </div>
+    </div>
+
+    <!-- TaskFlow (formerly To-Do App) -->
+    <div class="project-card reveal">
+      <div>
+        <div class="project-tag-row">
+          <span class="badge badge-java">Java</span>
+          <span class="badge badge-spring">Spring Boot</span>
+        </div>
+        <h3 class="project-title">TaskFlow — Secure Task Management API</h3>
+        <p class="project-desc">
+          A Spring Boot REST API for task management secured with stateless JWT authentication and
+          role-based access control (RBAC). A custom Spring Security filter chain validates tokens and
+          handles expiry, passwords are hashed with BCrypt, and a normalised PostgreSQL schema is
+          exposed through clean DTO-mapped responses.
         </p>
         <div class="project-tech">
           <span class="tech-pill">Spring Boot</span>
           <span class="tech-pill">PostgreSQL</span>
           <span class="tech-pill">JWT</span>
           <span class="tech-pill">Spring Security</span>
+          <span class="tech-pill">BCrypt</span>
           <span class="tech-pill">REST APIs</span>
           <span class="tech-pill">JPA / Hibernate</span>
-          <span class="tech-pill">Maven</span>
         </div>
       </div>
       <div class="project-links">
-        <a href="https://github.com/vikashinikaruppusamyk" class="link-btn" target="_blank">⤴ GitHub</a>
+        <a href="https://github.com/vikashinikaruppusamyk/TaskFlow-API" class="link-btn" target="_blank">⤴ GitHub</a>
         <button class="link-btn readmore" onclick="openModal('todo')">+ Read More</button>
       </div>
     </div>
@@ -1178,7 +1223,7 @@
           notifications — all with structured logging via SLF4J.
         </p>
         <div class="project-tech">
-          <span class="tech-pill">Java 25</span>
+          <span class="tech-pill">Java 17</span>
           <span class="tech-pill">OOP</span>
           <span class="tech-pill">Design Patterns</span>
           <span class="tech-pill">SLF4J</span>
@@ -1187,7 +1232,7 @@
         </div>
       </div>
       <div class="project-links">
-        <a href="https://github.com/vikashinikaruppusamyk" class="link-btn" target="_blank">⤴ GitHub</a>
+        <a href="https://github.com/vikashinikaruppusamyk/LibraryManagementSystem" class="link-btn" target="_blank">⤴ GitHub</a>
         <button class="link-btn readmore" onclick="openModal('library')">+ Read More</button>
       </div>
     </div>
@@ -1199,7 +1244,7 @@
           <span class="badge badge-java">Java</span>
           <span class="badge badge-spring">Spring Boot</span>
         </div>
-        <h3 class="project-title">LearnTrack — LMS</h3>
+        <h3 class="project-title">LearnTrack</h3>
         <p class="project-desc">
           A Learning Management System built under a layered Spring Boot architecture.
           Supports course creation, student enrollment, and progress tracking with a clean
@@ -1216,7 +1261,7 @@
         </div>
       </div>
       <div class="project-links">
-        <a href="https://github.com/vikashinikaruppusamyk" class="link-btn" target="_blank">⤴ GitHub</a>
+        <a href="https://github.com/vikashinikaruppusamyk/LearnTrack" class="link-btn" target="_blank">⤴ GitHub</a>
         <button class="link-btn readmore" onclick="openModal('learntrack')">+ Read More</button>
       </div>
     </div>
@@ -1242,7 +1287,7 @@
         </div>
       </div>
       <div class="project-links">
-        <a href="https://github.com/vikashinikaruppusamyk" class="link-btn" target="_blank">⤴ GitHub</a>
+        <a href="https://github.com/vikashinikaruppusamyk/MediTrack" class="link-btn" target="_blank">⤴ GitHub</a>
         <button class="link-btn readmore" onclick="openModal('meditrack')">+ Read More</button>
       </div>
     </div>
@@ -1287,7 +1332,7 @@
         work on meaningful systems, learn from a strong engineering team, and contribute
         real value from day one. If that sounds like a fit — I'd love to connect.
       </p>
-      <a href="mailto:vikashinikaruppusamyk@gmail.com" class="btn btn-primary">Say Hello →</a>
+      <a href="https://www.linkedin.com/in/vikashini-k/" target="_blank" class="btn btn-primary">Say Hello →</a>
     </div>
     <div class="contact-links">
       <a href="mailto:vikashinikaruppusamyk@gmail.com" class="contact-row">
@@ -1324,40 +1369,81 @@
 
 <!-- MODALS -->
 
-<!-- To-Do App Modal -->
+<!-- PayFlow API Modal -->
+<div class="modal-overlay" id="modal-payflow" onclick="closeOnOverlay(event, 'payflow')">
+  <div class="modal">
+    <div class="modal-header">
+      <button class="modal-close" onclick="closeModal('payflow')">✕</button>
+      <div class="modal-label">// Case Study</div>
+      <h2 class="modal-title">PayFlow API — UPI-style Digital Wallet</h2>
+    </div>
+    <div class="modal-body">
+      <div class="modal-section">
+        <div class="modal-section-title">Overview</div>
+        <p>A UPI-style digital wallet REST API built around one core concern: money should never be lost, double-counted, or left in a half-updated state. The system handles user registration, wallet balances, and peer-to-peer transfers with strict transactional correctness.</p>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-title">Problem Statement</div>
+        <p>Build a wallet API where concurrent transfers can't corrupt balances — a transfer must either fully complete or not happen at all — while rejecting invalid operations cleanly and keeping a verifiable record of every transaction.</p>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-title">Key Engineering Decisions</div>
+        <ul class="modal-bullets">
+          <li><strong>Layered architecture</strong> — Controller → Service → Repository for clean separation of concerns</li>
+          <li><strong>Atomic transfers with @Transactional</strong> — a transfer either fully commits or fully rolls back, preventing partial updates and race conditions under concurrent account access</li>
+          <li><strong>Server-side validation</strong> — rejects transfers on insufficient balance or invalid amounts, returning structured HTTP error responses (e.g. 400/422) instead of corrupting state</li>
+          <li><strong>Immutable transaction records</strong> — every transfer is persisted (sender, receiver, amount, timestamp) via Spring Data JPA, giving a full audit trail of wallet activity</li>
+        </ul>
+      </div>
+      <div class="modal-section">
+        <div class="modal-section-title">Tech Stack</div>
+        <div class="modal-tech-row">
+          <span class="tech-pill">Java</span>
+          <span class="tech-pill">Spring Boot</span>
+          <span class="tech-pill">Spring Data JPA</span>
+          <span class="tech-pill">H2 Database</span>
+          <span class="tech-pill">REST API</span>
+          <span class="tech-pill">Maven</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TaskFlow Modal (id kept as 'todo') -->
 <div class="modal-overlay" id="modal-todo" onclick="closeOnOverlay(event, 'todo')">
   <div class="modal">
     <div class="modal-header">
       <button class="modal-close" onclick="closeModal('todo')">✕</button>
       <div class="modal-label">// Case Study</div>
-      <h2 class="modal-title">To-Do / Task Management App</h2>
+      <h2 class="modal-title">TaskFlow — Secure Task Management API</h2>
     </div>
     <div class="modal-body">
       <div class="modal-section">
         <div class="modal-section-title">Overview</div>
-        <p>A production-grade full-stack task management application demonstrating modern backend architecture patterns. The system handles user authentication, task CRUD operations, and role-based access control — all within a clean Spring Boot backend.</p>
+        <p>A task management REST API built around backend security. The system handles user authentication, task operations, and role-based access control — all within a clean, layered Spring Boot backend.</p>
       </div>
       <div class="modal-section">
         <div class="modal-section-title">Problem Statement</div>
-        <p>Build a secure, scalable task management API that supports multiple users with isolated data, stateless authentication, and protected endpoints — while keeping the codebase maintainable and extensible.</p>
+        <p>Build a secure task management API that supports multiple users with isolated data, stateless authentication, and protected endpoints — while keeping the codebase maintainable and extensible.</p>
       </div>
       <div class="modal-section">
         <div class="modal-section-title">Architecture</div>
         <ul class="modal-bullets">
           <li><strong>Controller → Service → Repository</strong> layered architecture for clean separation of concerns</li>
-          <li><strong>JWT-based stateless auth</strong> — no server-side session state, tokens carry user identity and roles</li>
-          <li><strong>Spring Security</strong> for endpoint protection with role-based access control</li>
-          <li><strong>Normalised PostgreSQL schema</strong> with JPA/Hibernate for ORM — entities mapped with proper relationships</li>
-          <li>Vanilla JS frontend consuming the REST API as a separate client layer</li>
+          <li><strong>Stateless JWT authentication</strong> — no server-side session state; tokens carry user identity and roles</li>
+          <li><strong>Role-based access control (RBAC)</strong> via Spring Security to restrict endpoints by user role</li>
+          <li><strong>Custom Spring Security filter chain</strong> — validates tokens, handles expiry, and hashes passwords with BCrypt</li>
+          <li><strong>Normalised PostgreSQL schema</strong> with JPA/Hibernate; DTOs keep internal tables hidden from API responses</li>
         </ul>
       </div>
       <div class="modal-section">
         <div class="modal-section-title">Key Engineering Decisions</div>
         <ul class="modal-bullets">
           <li>Chose <strong>JWT over sessions</strong> for stateless scalability — each request is self-contained</li>
-          <li>Used <strong>Spring Security's filter chain</strong> to intercept and validate tokens before hitting controllers</li>
-          <li>Designed schema with foreign keys and constraints to enforce data integrity at the DB layer</li>
-          <li>Structured DTOs separately from entities to decouple API surface from DB schema</li>
+          <li>Used the <strong>Spring Security filter chain</strong> to intercept and validate tokens before they hit controllers</li>
+          <li>Hashed passwords with <strong>BCrypt</strong> so credentials are never stored in a recoverable form</li>
+          <li>Structured DTOs separately from entities to decouple the API surface from the DB schema</li>
         </ul>
       </div>
       <div class="modal-section">
@@ -1367,10 +1453,10 @@
           <span class="tech-pill">PostgreSQL</span>
           <span class="tech-pill">JWT</span>
           <span class="tech-pill">Spring Security</span>
+          <span class="tech-pill">BCrypt</span>
           <span class="tech-pill">JPA / Hibernate</span>
           <span class="tech-pill">REST APIs</span>
           <span class="tech-pill">Maven</span>
-          <span class="tech-pill">Vanilla JS</span>
         </div>
       </div>
     </div>
@@ -1414,7 +1500,7 @@
       <div class="modal-section">
         <div class="modal-section-title">Tech Stack</div>
         <div class="modal-tech-row">
-          <span class="tech-pill">Java 25</span>
+          <span class="tech-pill">Java 17</span>
           <span class="tech-pill">OOP</span>
           <span class="tech-pill">Design Patterns</span>
           <span class="tech-pill">SOLID</span>
